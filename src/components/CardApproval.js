@@ -4,13 +4,14 @@ function CardApproval({ requests, onApprove, onReject }) {
 
     return (
         <>
+        <h2>Solicitudes de tarjeta de crédito</h2>
             <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
       {requests.map((request, index) => (
         <ListItem
           key={index}
           disableGutters
         >
-        <Card sx={{ maxWidth: 720 }}>
+        <Card sx={{ maxWidth: "100%" }}>
             <CardContent>
                 <p>Cliente: {request.name}</p>       
                 <p>C.I.: {request.ci}</p>       
@@ -21,7 +22,6 @@ function CardApproval({ requests, onApprove, onReject }) {
             </CardContent>
         </Card> 
         </ListItem>
-        
       ))}
     </List>
         </>

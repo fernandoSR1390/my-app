@@ -10,6 +10,9 @@ function ContactForm({ onSubmit }) {
     const [telephone, setTelephone] = useState('');
     const [email, setEmail] = useState('');
     const [emailError, setEmailError] = useState(false);
+    const [ciError, setCiError] = useState(false);
+    const [nameError, setNameError] = useState(false);
+    const [telephoneError, setTelephoneError] = useState(false);
   
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -17,6 +20,21 @@ function ContactForm({ onSubmit }) {
             setEmailError(false);
         } else {
             setEmailError(true);
+        }
+        if (telephone.length <= 8) {
+            setTelephoneError(true);
+        } else {
+            setTelephoneError(false);
+        }
+        if (ci.length < 7) {
+            setCiError(true);
+        } else {
+            setCiError(false);
+        }
+        if (name.length < 7) {
+            setNameError(true);
+        } else {
+            setNameError(false);
         }
         onSubmit({ name, ci, telephone, email });
         setName('');
@@ -44,6 +62,8 @@ function ContactForm({ onSubmit }) {
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
                                 required
+                                error={nameError}
+                                helperText={nameError ? 'nombre invalido' : ''} 
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -55,6 +75,8 @@ function ContactForm({ onSubmit }) {
                                 value={ci}
                                 onChange={(e) => setCi(e.target.value)} 
                                 required
+                                error={ciError}
+                                helperText={ciError ? 'Carnet de identidad invalido' : ''} 
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -78,15 +100,6 @@ function ContactForm({ onSubmit }) {
                                 onChange={setTelephone}
                                 defaultCountry="BO"
                             />
-                            {/* <TextField
-                                fullWidth
-                                label="Telefono"
-                                variant="outlined"
-                                type="text"
-                                value={telephone}
-                                onChange={(e) => setTelephone(e.target.value)} 
-                                required
-                            /> */}
                         </Grid>
                         <Grid item xs={12}>
                             <Button variant="contained" color="primary" type="submit">
